@@ -1,6 +1,7 @@
 
 //please examine the array in the pokemon.js file
 //1.  import the array so that we can use it
+const pokemon = require('./pokemon');
 
 //2. create a variable that will use the imported array and will create a new array where only properties below exist for each element (assume the properties exist): 
 // id
@@ -9,8 +10,30 @@
 // type
 // stats
 
+const updatedList = pokemon.map(v => {
+    return {
+        id: v.id,
+        name: v.name,
+        img: v.img,
+        type: v.type,
+        stats: v.stats,
+    }
+});
+
+
 // 3. the array create on step2 is too long. we only want a handful. only want those elements which are on index 13-17. 
 // using the variable created on step 2, lets create another variable that will return elements which were on index 13-17. 
+
+const shortenList = updatedList.filter((v, i) => {
+    if (i >= 13 && i <= 17) {
+        return true;
+    } else {
+        return false;
+    }
+})
+
+
+
 
 // 4. using the variable created on step 3, we want to update some of the object values found at index 3. Lets just pretend that 3 value it provided via a url parameter ;p
 // take a look at the variable below. it holds the data which will be to updated. Notice that NOT ALL VALUES will be replaced. 
@@ -25,8 +48,22 @@ const reqBody = {
     spdefense: '5',
     speed: '6'
 }
+
+
+shortenList[3] = {
+    ...shortenList[3],
+    name: 'Pidgeotto!',
+    stats: {
+        hp: '1',
+        attack: '2',
+        defense: '3',
+        spattack: '4',
+        spdefense: '5',
+        speed: '6'
+    }
+}
 // log should look like this:
-// play attention to the change on the the object on index 3 
+// play attention to the change on the the object on index 3
 // [
 //     {
 //         id: '014',
